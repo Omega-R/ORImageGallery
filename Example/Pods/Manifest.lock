@@ -1,0 +1,16 @@
+PODS:
+  - ORImageGallery (0.1.0)
+
+DEPENDENCIES:
+  - ORImageGallery (from `../`)
+
+EXTERNAL SOURCES:
+  ORImageGallery:
+    :path: ../
+
+SPEC CHECKSUMS:
+  ORImageGallery: ce18ca78d484d5d2a8b9fdb09d45f320a66bbdd5
+
+PODFILE CHECKSUM: 8a403d6b4652b80143abf5f8285ea466e82c9555
+
+COCOAPODS: 1.2.1

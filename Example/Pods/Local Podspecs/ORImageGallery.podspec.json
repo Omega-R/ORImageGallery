@@ -1,0 +1,22 @@
+{
+  "name": "ORImageGallery",
+  "version": "0.1.0",
+  "summary": "A short description of ORImageGallery.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/Evgeny Ivanov/ORImageGallery",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Evgeny Ivanov": "evgeny.ivanov@omega-r.com"
+  },
+  "source": {
+    "git": "https://github.com/Evgeny Ivanov/ORImageGallery.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "ORImageGallery/Classes/**/*"
+}

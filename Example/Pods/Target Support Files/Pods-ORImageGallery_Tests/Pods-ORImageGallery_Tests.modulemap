@@ -1,0 +1,6 @@
+framework module Pods_ORImageGallery_Tests {
+  umbrella header "Pods-ORImageGallery_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
