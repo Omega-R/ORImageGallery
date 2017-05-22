@@ -8,18 +8,18 @@
 
 import UIKit
 
-protocol ORImageGalleryDataSource {
+public protocol ORImageGalleryDataSource {
     func numberOfItems() -> Int
     func item(atIndex index: Int) -> ORImageGalleryItem
     
     func topView() -> UIView?
 }
 
-protocol ORImageGalleryDelegate {
+public protocol ORImageGalleryDelegate {
     func imageGalleryDidScroll(toIndex index: Int)
 }
 
-class ORImageGallery: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate {
+open class ORImageGallery: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate {
 
     @IBOutlet weak var csViewBaseWidth: NSLayoutConstraint!
     @IBOutlet weak var csViewBaseHeight: NSLayoutConstraint!
@@ -130,10 +130,10 @@ class ORImageGallery: UIViewController, UICollectionViewDataSource, UICollection
             case .itemWithImage(let image):
                 cell.pictureImageView.image = image
             case .itemWithURL(let url):
-//                cell.pictureImageView.sd_setImage(with: url, completed: { (image, error, type, url) in
-//                    cell.pictureImageView.contentMode = .scaleAspectFit
-//                    cell.contentView.layoutIfNeeded()
-//                })
+                cell.pictureImageView.sd_setImage(with: url, completed: { (image, error, type, url) in
+                    cell.pictureImageView.contentMode = .scaleAspectFit
+                    cell.contentView.layoutIfNeeded()
+                })
                 break
             }
         }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ORImageGallery
 
 class ViewController: UIViewController {
 
@@ -21,7 +22,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func showGalleryTouched(_ sender: Any) {
-        let galleryViewController = var viewController = ORimage(nibName: "OfferDetailViewController", bundle: nil)
+        
     }
     
 }

@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
 
   s.description      = "Pod for display picture gallery, and show custom top layout, and make rotate."
 
-  s.homepage         = 'https://github.com/Evgeny Ivanov/ORImageGallery'
+  s.homepage         = 'https://bitbucket.org/omegarinc/orimagegallery'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Evgeny Ivanov' => 'evgeny.ivanov@omega-r.com' }
@@ -29,11 +29,11 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '8.0'
   s.requires_arc = true
 
-  s.source_files = 'Pod/Classes/**/*' 
+  s.source_files = 'ORImageGallery/Classes/**/*'
 
-  s.resource_bundles = {
-    'ORImageGallery' => ['ORImageGallery/Assets/*.png']
-  }
+#  s.resource_bundles = {
+#    'ORImageGallery' => ['ORImageGallery/Assets/*.png']
+#  }
 
   s.frameworks = 'UIKit'
   s.dependency 'PureLayout', '~> 3.0.2'
