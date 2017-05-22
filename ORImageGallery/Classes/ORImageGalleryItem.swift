@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum ORImageGalleryItem  {
+public enum ORImageGalleryItem  {
     case itemWithImage(image: UIImage)
     case itemWithURL(url: URL)
 }

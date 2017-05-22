@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 public protocol ORImageGalleryDataSource {
     func numberOfItems() -> Int
@@ -26,18 +27,25 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
     @IBOutlet weak var viewBase: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var dataSource: ORImageGalleryDataSource?
-    var delegate: ORImageGalleryDelegate?
+    public var dataSource: ORImageGalleryDataSource?
+    public var delegate: ORImageGalleryDelegate?
     
     var lastOrientation: UIDeviceOrientation?
-    var closeBySwipe: Bool = false
+    public var closeBySwipe: Bool = false
     
     let cellIdentifier = "pictureCell"
     var selectedIndexPath = IndexPath(row: 0, section: 0)
     
     // MARK: - Lifecycle
     
-    override func viewDidLoad() {
+    public static func createFromNib() -> ORImageGallery {
+        let bundle = Bundle(for: self.classForCoder())
+        return bundle.loadNibNamed("ORImageGallery", owner: nil, options: nil)?.first as! ORImageGallery
+        
+//        return ORImageGallery(nibName: "ORImageGallery", bundle: nil)
+    }
+    
+    override open func viewDidLoad() {
         super.viewDidLoad()
 
         if let topView = dataSource?.topView() {
@@ -45,7 +53,7 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override open func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(deviceOrientationDidChange), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
 
@@ -53,7 +61,7 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
         NotificationCenter.default.removeObserver(self)
     }
     
-    override func didReceiveMemoryWarning() {
+    override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
@@ -116,11 +124,11 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
     
     // MARK: - UICollectionViewDataSource
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource?.numberOfItems() ?? 0
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? ORImageGalleryCVCell else {
             return UICollectionViewCell()
         }
@@ -148,7 +156,7 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
         return CGSize(width: csViewBaseWidth.constant, height: csViewBaseHeight.constant)
     }
     
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    public func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let cell = cell as? ORImageGalleryCVCell {
             cell.scrollView.setZoomScale(cell.scrollView.minimumZoomScale, animated: false)
         }
@@ -156,7 +164,7 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
     
     // MARK: - UIScrollViewDelegate
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let index = round(scrollView.contentOffset.x / scrollView.bounds.width)
         delegate?.imageGalleryDidScroll(toIndex: Int(index))
     }
