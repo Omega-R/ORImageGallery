@@ -14,6 +14,8 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		7EFF2BF21EBB829B002761CB /* ORImageGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF2BF11EBB829B002761CB /* ORImageGallery.swift */; };
+		7EFF2BF41EBB8393002761CB /* ORImageGalleryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF2BF31EBB8393002761CB /* ORImageGalleryItem.swift */; };
 		BBA5D99EF85EC8078BAC6789 /* Pods_ORImageGallery_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FBC05AAA00F9FC445128605 /* Pods_ORImageGallery_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,7 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1CBC7D69381389F5D8B384A3 /* ORImageGallery.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = ORImageGallery.podspec; path = ../ORImageGallery.podspec; sourceTree = "<group>"; };
+		1CBC7D69381389F5D8B384A3 /* ORImageGallery.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ORImageGallery.podspec; path = ../ORImageGallery.podspec; sourceTree = "<group>"; };
 		1F7871972B733AA097510B24 /* Pods-ORImageGallery_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ORImageGallery_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ORImageGallery_Tests/Pods-ORImageGallery_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		1FBC05AAA00F9FC445128605 /* Pods_ORImageGallery_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ORImageGallery_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E7291918B77EBFDECA3D5A6 /* Pods-ORImageGallery_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ORImageGallery_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ORImageGallery_Tests/Pods-ORImageGallery_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -42,9 +44,11 @@
 		607FACE51AFB9204008FA782 /* ORImageGallery_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ORImageGallery_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		6547AA5ACE2DEF7627354F1C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		6547AA5ACE2DEF7627354F1C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		7CABDA936A29222AF4F18CFE /* Pods-ORImageGallery_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ORImageGallery_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ORImageGallery_Example/Pods-ORImageGallery_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		829A660488A443F9FD69BD8D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		7EFF2BF11EBB829B002761CB /* ORImageGallery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORImageGallery.swift; sourceTree = "<group>"; };
+		7EFF2BF31EBB8393002761CB /* ORImageGalleryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORImageGalleryItem.swift; sourceTree = "<group>"; };
+		829A660488A443F9FD69BD8D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		ACD7A8263491A239FB9B517A /* Pods_ORImageGallery_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ORImageGallery_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D736EF3E7A9DC9700DC0E242 /* Pods-ORImageGallery_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ORImageGallery_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-ORImageGallery_Example/Pods-ORImageGallery_Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,6 +103,8 @@
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
+				7EFF2BF11EBB829B002761CB /* ORImageGallery.swift */,
+				7EFF2BF31EBB8393002761CB /* ORImageGalleryItem.swift */,
 			);
 			name = "Example for ORImageGallery";
 			path = ORImageGallery;
@@ -363,6 +369,8 @@
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				7EFF2BF21EBB829B002761CB /* ORImageGallery.swift in Sources */,
+				7EFF2BF41EBB8393002761CB /* ORImageGalleryItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
