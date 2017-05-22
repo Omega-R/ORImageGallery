@@ -1,8 +1,8 @@
 {
   "name": "ORImageGallery",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "summary": "A short description of ORImageGallery.",
-  "description": "TODO: Add long description of the pod here.",
+  "description": "Pod for display picture gallery, and show custom top layout, and make rotate.",
   "homepage": "https://github.com/Evgeny Ivanov/ORImageGallery",
   "license": {
     "type": "MIT",
@@ -12,11 +12,26 @@
     "Evgeny Ivanov": "evgeny.ivanov@omega-r.com"
   },
   "source": {
-    "git": "https://github.com/Evgeny Ivanov/ORImageGallery.git",
-    "tag": "0.1.0"
+    "git": "https://bitbucket.org/omegarinc/orimagegallery.git",
+    "tag": "1.0.0"
   },
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "ORImageGallery/Classes/**/*"
+  "requires_arc": true,
+  "source_files": "Pod/Classes/**/*",
+  "resource_bundles": {
+    "ORImageGallery": [
+      "ORImageGallery/Assets/*.png"
+    ]
+  },
+  "frameworks": "UIKit",
+  "dependencies": {
+    "PureLayout": [
+      "~> 3.0.2"
+    ],
+    "SDWebImage": [
+      "~> 3.8.2"
+    ]
+  }
 }

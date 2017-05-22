@@ -1,6 +1,0 @@
-framework module ORImageGallery {
-  umbrella header "ORImageGallery-umbrella.h"
-
-  export *
-  module * { export * }
-}

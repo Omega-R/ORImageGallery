@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
-  s.description      = ""
+  s.description      = "Pod for display picture gallery, and show custom top layout, and make rotate."
 
   s.homepage         = 'https://github.com/Evgeny Ivanov/ORImageGallery'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
@@ -28,7 +28,6 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, '8.0'
   s.requires_arc = true
-  echo "2.3" > .swift-version
 
   s.source_files = 'Pod/Classes/**/*' 
 

@@ -20,5 +20,9 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func showGalleryTouched(_ sender: Any) {
+        let galleryViewController = var viewController = ORimage(nibName: "OfferDetailViewController", bundle: nil)
+    }
+    
 }
 
