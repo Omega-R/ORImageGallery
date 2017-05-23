@@ -68,6 +68,7 @@
                 <outlet property="collectionView" destination="8pq-ap-3nK" id="VM4-Bt-0Er"/>
                 <outlet property="csViewBaseHeight" destination="ixu-D7-rTn" id="3pC-GL-N7z"/>
                 <outlet property="csViewBaseWidth" destination="hmY-tY-nSC" id="Esh-gr-UsU"/>
+                <outlet property="layoutConstraintCenterXBaseView" destination="GiD-iS-oh1" id="oIW-PJ-JPW"/>
                 <outlet property="layoutConstraintCenterYBaseView" destination="7Po-0J-Ht3" id="RYV-vM-2Vf"/>
                 <outlet property="viewBase" destination="MNZ-dq-Bn1" id="myw-TY-Fn0"/>
                 <outlet property="viewForTopView" destination="IVk-fq-nbm" id="ODk-6h-Ec6"/>

@@ -41,6 +41,7 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var viewForTopView: UIView!
     @IBOutlet weak var layoutConstraintCenterYBaseView: NSLayoutConstraint!
+    @IBOutlet weak var layoutConstraintCenterXBaseView: NSLayoutConstraint!
     
     public var dataSource: ORImageGalleryDataSource?
     public var delegate: ORImageGalleryDelegate?
@@ -142,7 +143,7 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
         
         if lastOrientation == .landscapeLeft || lastOrientation == .landscapeRight {
             swap(&xDiff, &yDiff)
-            yDiff = lastOrientation == .landscapeLeft ? -yDiff : yDiff
+            yDiff = lastOrientation == .landscapeLeft ? yDiff : -yDiff
         }
         
         if fabs(xDiff) > fabs(yDiff) {
@@ -152,13 +153,13 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
         pointPreviousPan = point;
         
         let isLastPanGesture = recognizaer.state == .ended
+        let constraint = (lastOrientation == .landscapeLeft || lastOrientation == .landscapeRight) ? layoutConstraintCenterXBaseView : layoutConstraintCenterYBaseView
         
-        var nextYConst = layoutConstraintCenterYBaseView.constant + yDiff
-        nextYConst = nextYConst < 0 ? 0 : nextYConst
+        let nextConst = constraint!.constant + yDiff
+        constraint!.constant = nextConst
         
-        layoutConstraintCenterYBaseView.constant = nextYConst
         let maxOffset = collectionView.bounds.height
-        let alpha = 1 - abs(nextYConst) / maxOffset
+        let alpha = 1 - abs(nextConst) / maxOffset
         updateMainViewAlpha(alpha: alpha)
         
         if isLastPanGesture {
@@ -214,8 +215,7 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
             lastOrientation = .portrait
             angle = 0
         } else {
-            let index = round(collectionView.contentOffset.x / collectionView.bounds.width)
-            selectedIndexPath = IndexPath(row: Int(index), section: 0)
+            selectedIndexPath = IndexPath(row: previousIndex, section: 0)
             csViewBaseWidth.constant = widthConstraintValue
             csViewBaseHeight.constant = heightConstraintValue
         }
@@ -274,7 +274,7 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
     // MARK: - UIScrollViewDelegate
     
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let index = Int(round(scrollView.contentOffset.x / scrollView.bounds.width))
+        let index = Int(round(collectionView.contentOffset.x / csViewBaseWidth.constant))
         
         if index != previousIndex {
             previousIndex = index
