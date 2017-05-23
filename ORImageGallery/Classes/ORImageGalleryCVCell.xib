@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="lfB-cb-cbs" customClass="ORImageGalleryCVCell" customModule="ORImageGallery" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="374" height="666"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="374" height="666"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="10" translatesAutoresizingMaskIntoConstraints="NO" id="zhv-XG-K89">
+                        <rect key="frame" x="0.0" y="0.0" width="374" height="666"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kAt-t8-Euz">
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="250" id="8Ba-Cn-3fP"/>
+                                    <constraint firstAttribute="width" priority="250" id="kwq-Yb-FR9"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="kAt-t8-Euz" secondAttribute="trailing" priority="750" id="Qos-l3-2Nd"/>
+                            <constraint firstItem="kAt-t8-Euz" firstAttribute="top" secondItem="zhv-XG-K89" secondAttribute="top" priority="750" id="fxk-pJ-Iad"/>
+                            <constraint firstAttribute="bottom" secondItem="kAt-t8-Euz" secondAttribute="bottom" priority="750" id="mxs-4w-lmO"/>
+                            <constraint firstItem="kAt-t8-Euz" firstAttribute="leading" secondItem="zhv-XG-K89" secondAttribute="leading" priority="750" id="qfy-c6-yUh"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="delegate" destination="lfB-cb-cbs" id="N9N-jV-aNH"/>
+                        </connections>
+                    </scrollView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="zhv-XG-K89" firstAttribute="width" secondItem="lfB-cb-cbs" secondAttribute="width" id="DtG-hf-eDZ"/>
+                <constraint firstItem="zhv-XG-K89" firstAttribute="leading" secondItem="lfB-cb-cbs" secondAttribute="leading" id="LRM-Ot-Txz"/>
+                <constraint firstAttribute="bottom" secondItem="zhv-XG-K89" secondAttribute="bottom" id="NEQ-v7-yGn"/>
+                <constraint firstItem="zhv-XG-K89" firstAttribute="height" secondItem="lfB-cb-cbs" secondAttribute="height" id="fzu-JH-H9x"/>
+                <constraint firstItem="zhv-XG-K89" firstAttribute="top" secondItem="lfB-cb-cbs" secondAttribute="top" id="jfc-gU-9Xq"/>
+                <constraint firstAttribute="trailing" secondItem="zhv-XG-K89" secondAttribute="trailing" id="p0k-WI-QXh"/>
+            </constraints>
+            <connections>
+                <outlet property="imageViewBottomConstraint" destination="mxs-4w-lmO" id="i87-rO-xhX"/>
+                <outlet property="imageViewLeadingConstraint" destination="qfy-c6-yUh" id="qdk-BX-wVv"/>
+                <outlet property="imageViewTopConstraint" destination="fxk-pJ-Iad" id="LA6-27-MXQ"/>
+                <outlet property="imageViewTrailingConstraint" destination="Qos-l3-2Nd" id="mbL-ta-1mZ"/>
+                <outlet property="pictureImageView" destination="kAt-t8-Euz" id="dzJ-dI-Mi1"/>
+                <outlet property="scrollView" destination="zhv-XG-K89" id="QAI-9X-t0f"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+</document>

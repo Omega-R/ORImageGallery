@@ -83,10 +83,8 @@ class ORImageGalleryCVCell: UICollectionViewCell, UIScrollViewDelegate, UIGestur
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y < 0 {
             let alpha = 1 - abs(scrollView.contentOffset.y) / scrollView.bounds.height
-            scrollView.transform = CGAffineTransform(scaleX: alpha, y: alpha)
             delegate?.updateMainViewAlpha(alpha: alpha)
         } else {
-            scrollView.transform = CGAffineTransform(scaleX: 1, y: 1)
             delegate?.updateMainViewAlpha(alpha: 1)
         }
     }

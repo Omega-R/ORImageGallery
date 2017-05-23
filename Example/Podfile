@@ -2,10 +2,4 @@ use_frameworks!
 
 target 'ORImageGallery_Example' do
   pod 'ORImageGallery', :path => '../'
-
-  target 'ORImageGallery_Tests' do
-    inherit! :search_paths
-
-    
-  end
 end
