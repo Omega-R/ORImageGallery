@@ -1,5 +1,5 @@
 PODS:
-  - ORImageGallery (1.0.0):
+  - ORImageGallery (1.0.1):
     - PureLayout (~> 3.0.2)
     - SDWebImage (~> 3.8.2)
   - PureLayout (3.0.2)
@@ -15,7 +15,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  ORImageGallery: a99fbf22e8b16788130f7d6bf337b5613ca78230
+  ORImageGallery: 2a506684369a38177203024980b1538b2a7e6bd6
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
 
