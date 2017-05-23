@@ -10,11 +10,23 @@ import UIKit
 import SDWebImage
 import PureLayout
 
-public protocol ORImageGalleryDataSource {
-    func numberOfItems() -> Int
-    func item(atIndex index: Int) -> ORImageGalleryItem
+class ImageGalleryTopView: UIView {
     
-    func topView() -> UIView?
+    override public func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        guard let v = super.hitTest(point, with: event) else {
+            return nil
+        }
+        
+        let needToIgnoreHit = v == self
+        return needToIgnoreHit ? nil : v
+    }
+    
+}
+
+public protocol ORImageGalleryDataSource {
+    func numberOfItemsInOrGallery(_ gallery: ORImageGallery) -> Int
+    func orGallery(_ gallery: ORImageGallery, itemAt index: Int) -> ORImageGalleryItem
+    func orGallery(_ gallery: ORImageGallery, topView: UIView)
 }
 
 public protocol ORImageGalleryDelegate {
@@ -27,9 +39,8 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
     @IBOutlet weak var csViewBaseHeight: NSLayoutConstraint!
     @IBOutlet weak var viewBase: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var topSpaceCollectionView: NSLayoutConstraint!
-    @IBOutlet weak var bottomCollectionView: NSLayoutConstraint!
     @IBOutlet weak var viewForTopView: UIView!
+    @IBOutlet weak var layoutConstraintCenterYBaseView: NSLayoutConstraint!
     
     public var dataSource: ORImageGalleryDataSource?
     public var delegate: ORImageGalleryDelegate?
@@ -41,13 +52,13 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
     var selectedIndexPath = IndexPath(row: 0, section: 0)
     var lastOrientation: UIDeviceOrientation?
     var firstOrientationChange = true
-    var topView: UIView?
     
     var pan: UIPanGestureRecognizer!
     var panDistanceX: CGFloat = 0
     var panDistanceY: CGFloat = 0
     var pointPreviousPan = CGPoint(x: 0, y: 0)
     var previousAllInfoHeight: CGFloat = 0
+    var previousIndex: Int = 0
     
     // MARK: - Lifecycle
     
@@ -67,9 +78,10 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
     
     override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        topView = dataSource?.topView()
         selectedIndexPath = IndexPath(row: selectedIndex, section: 0)
+        previousIndex = selectedIndex
         deviceOrientationDidChange()
+        dataSource?.orGallery(self, topView: viewForTopView)
         
         if rotation {
             NotificationCenter.default.addObserver(self, selector: #selector(deviceOrientationDidChange), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
@@ -78,11 +90,6 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
         if closeBySwipe {
             pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
             view.addGestureRecognizer(pan)
-        }
-        
-        if topView != nil {
-            viewForTopView.addSubview(topView!)
-            topView!.autoPinEdgesToSuperviewEdges()
         }
     }
 
@@ -94,8 +101,8 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
         super.didReceiveMemoryWarning()
     }
     
-    fileprivate func scrollCollectionView() {
-        if selectedIndexPath == IndexPath(row: 0, section: 0) {
+    fileprivate func scrollCollectionView(forced: Bool = false) {
+        if selectedIndexPath == IndexPath(row: 0, section: 0) && !forced {
             return
         }
         collectionView.scrollToItem(at: selectedIndexPath, at: UICollectionViewScrollPosition.centeredHorizontally, animated: false)
@@ -103,6 +110,22 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
     
     fileprivate func closeViewController() {
         presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - Public functions
+    
+    public func scrollToLeft() {
+        if selectedIndexPath.row > 0 {
+            selectedIndexPath = IndexPath(row: selectedIndexPath.row - 1, section: 0)
+            scrollCollectionView(forced: true)
+        }
+    }
+    
+    public func scrollToRight() {
+        if selectedIndexPath.row < (dataSource?.numberOfItemsInOrGallery(self) ?? 0) - 1 {
+            selectedIndexPath = IndexPath(row: selectedIndexPath.row + 1, section: 0)
+            scrollCollectionView(forced: true)
+        }
     }
     
     // MARK: - UIGestureRecognizer methods
@@ -130,11 +153,10 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
         
         let isLastPanGesture = recognizaer.state == .ended
         
-        var nextYConst = topSpaceCollectionView.constant + yDiff
+        var nextYConst = layoutConstraintCenterYBaseView.constant + yDiff
         nextYConst = nextYConst < 0 ? 0 : nextYConst
         
-        topSpaceCollectionView.constant = nextYConst
-        bottomCollectionView.constant = -nextYConst
+        layoutConstraintCenterYBaseView.constant = nextYConst
         let maxOffset = collectionView.bounds.height
         let alpha = 1 - abs(nextYConst) / maxOffset
         updateMainViewAlpha(alpha: alpha)
@@ -207,7 +229,7 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
     // MARK: - UICollectionViewDataSource
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource?.numberOfItems() ?? 0
+        return dataSource?.numberOfItemsInOrGallery(self) ?? 0
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -215,7 +237,7 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
             return UICollectionViewCell()
         }
         
-        if let item = dataSource?.item(atIndex: indexPath.row) {
+        if let item = dataSource?.orGallery(self, itemAt: indexPath.row) {
             switch item {
             case .itemWithImage(let image):
                 cell.pictureImageView.image = image
@@ -252,18 +274,22 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
     // MARK: - UIScrollViewDelegate
     
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let index = round(scrollView.contentOffset.x / scrollView.bounds.width)
-        delegate?.imageGalleryDidScroll(toIndex: Int(index))
+        let index = Int(round(scrollView.contentOffset.x / scrollView.bounds.width))
+        
+        if index != previousIndex {
+            previousIndex = index
+            delegate?.imageGalleryDidScroll(toIndex: index)
+        }
     }
     
     // MARK: - ORImageGalleryCVCellDelegate
     
     func doSingleTap() {
-        topView?.isHidden = !(topView?.isHidden ?? false)
+        viewForTopView.isHidden = !viewForTopView.isHidden
     }
     
     func doDoubleTap(showBars: Bool) {
-        topView?.isHidden = !showBars
+        viewForTopView?.isHidden = !showBars
     }
     
     func updateMainViewAlpha(alpha: CGFloat) {

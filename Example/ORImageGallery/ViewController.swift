@@ -11,8 +11,6 @@ import ORImageGallery
 
 class ViewController: UIViewController, ORImageGalleryDataSource, ORImageGalleryDelegate {
     
-    @IBOutlet weak var viewTopForGallery: UIView!
-
     let pictures = ["https://www.grumpycats.com/images/about/tardar.jpg",
                     "https://yt3.ggpht.com/-V92UP8yaNyQ/AAAAAAAAAAI/AAAAAAAAAAA/zOYDMx8Qk3c/s900-c-k-no-mo-rj-c0xffffff/photo.jpg",
                     "https://cdn5.thr.com/sites/default/files/imagecache/scale_crop_768_433/2014/09/too_good_for_grumpy_cat.jpg"]
@@ -37,25 +35,33 @@ class ViewController: UIViewController, ORImageGalleryDataSource, ORImageGallery
         present(galleryController, animated: true, completion: nil)
     }
     
+    func closePressed() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: - ORImageGalleryDataSource
     
-    func numberOfItems() -> Int {
+    func numberOfItemsInOrGallery(_ gallery: ORImageGallery) -> Int {
         return pictures.count
     }
     
-    func item(atIndex index: Int) -> ORImageGalleryItem {
+    func orGallery(_ gallery: ORImageGallery, itemAt index: Int) -> ORImageGalleryItem {
         let picture = pictures[index]
         return ORImageGalleryItem.itemWithURL(url: URL(string: picture)!)
     }
     
-    func topView() -> UIView? {
-        return viewTopForGallery
+    func orGallery(_ gallery: ORImageGallery, topView: UIView) {
+        let b = UIButton(frame: CGRect(x: 16, y: 16, width: 44, height: 44))
+        b.addTarget(self, action: #selector(closePressed), for: .touchUpInside)
+        b.setTitle("Close", for: .normal)
+        b.sizeToFit()
+        topView.addSubview(b)
     }
     
     // MARK: - ORImageGalleryDelegate
     
     func imageGalleryDidScroll(toIndex index: Int) {
-        
+        print(index)
     }
     
 }
