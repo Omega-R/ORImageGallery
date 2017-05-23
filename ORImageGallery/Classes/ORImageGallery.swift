@@ -23,13 +23,13 @@ class ImageGalleryTopView: UIView {
     
 }
 
-public protocol ORImageGalleryDataSource {
+public protocol ORImageGalleryDataSource: class {
     func numberOfItemsInOrGallery(_ gallery: ORImageGallery) -> Int
     func orGallery(_ gallery: ORImageGallery, itemAt index: Int) -> ORImageGalleryItem
     func orGallery(_ gallery: ORImageGallery, topView: UIView)
 }
 
-public protocol ORImageGalleryDelegate {
+public protocol ORImageGalleryDelegate: class {
     func imageGalleryDidScroll(toIndex index: Int)
 }
 
@@ -43,8 +43,8 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
     @IBOutlet weak var layoutConstraintCenterYBaseView: NSLayoutConstraint!
     @IBOutlet weak var layoutConstraintCenterXBaseView: NSLayoutConstraint!
     
-    public var dataSource: ORImageGalleryDataSource?
-    public var delegate: ORImageGalleryDelegate?
+    public weak var dataSource: ORImageGalleryDataSource?
+    public weak var delegate: ORImageGalleryDelegate?
     public var closeBySwipe = false
     public var selectedIndex = 0
     public var rotation = false
@@ -193,9 +193,9 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
         
         switch currentOrientation {
         case .portrait:
-            print("Portrait")
+            break
         case .portraitUpsideDown:
-            print("PortraitUpsideDown")
+            break
         case .landscapeLeft:
             widthConstraintValue = height
             heightConstraintValue = width
@@ -303,5 +303,4 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
             closeViewController()
         }
     }
-    
 }
