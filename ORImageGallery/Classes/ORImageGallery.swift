@@ -143,7 +143,6 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
         
         if lastOrientation == .landscapeLeft || lastOrientation == .landscapeRight {
             swap(&xDiff, &yDiff)
-            yDiff = lastOrientation == .landscapeLeft ? yDiff : -yDiff
         }
         
         if fabs(xDiff) > fabs(yDiff) {
@@ -215,7 +214,10 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
             lastOrientation = .portrait
             angle = 0
         } else {
-            selectedIndexPath = IndexPath(row: previousIndex, section: 0)
+            if let visibleCell = collectionView.visibleCells.first, let indexVisibleCell = collectionView.indexPath(for: visibleCell) {
+                selectedIndexPath = indexVisibleCell
+            }
+            
             csViewBaseWidth.constant = widthConstraintValue
             csViewBaseHeight.constant = heightConstraintValue
         }
