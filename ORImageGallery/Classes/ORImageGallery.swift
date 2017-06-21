@@ -27,14 +27,15 @@ public protocol ORImageGalleryDataSource: class {
     func numberOfItemsInOrGallery(_ gallery: ORImageGallery) -> Int
     func orGallery(_ gallery: ORImageGallery, itemAt index: Int) -> ORImageGalleryItem
     func orGallery(_ gallery: ORImageGallery, topView: UIView)
+    func orGalleryOpenFromView(_ gallery: ORImageGallery) -> UIView?
 }
 
 public protocol ORImageGalleryDelegate: class {
     func imageGalleryDidScroll(toIndex index: Int)
 }
 
-open class ORImageGallery: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, ORImageGalleryCVCellDelegate {
-
+open class ORImageGallery: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, ORImageGalleryCVCellDelegate, UIViewControllerTransitioningDelegate {
+    
     @IBOutlet weak var csViewBaseWidth: NSLayoutConstraint!
     @IBOutlet weak var csViewBaseHeight: NSLayoutConstraint!
     @IBOutlet weak var viewBase: UIView!
@@ -66,7 +67,8 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
     public static func createFromNib() -> ORImageGallery {
         let bundle = Bundle(for: self.classForCoder())
         let controller = bundle.loadNibNamed("ORImageGallery", owner: nil, options: nil)?.first as! ORImageGallery
-        controller.modalPresentationStyle = .overCurrentContext
+        controller.modalPresentationStyle = .custom
+        controller.transitioningDelegate = controller
         return controller
     }
     
@@ -111,6 +113,14 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
     
     fileprivate func closeViewController() {
         presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    fileprivate func initFrameForGallery(presentingVC vc: UIViewController) -> CGRect? {
+        guard let initView = dataSource?.orGalleryOpenFromView(self) else {
+            return nil
+        }
+        
+        return initView.superview?.convert(initView.frame, from: vc.view)
     }
     
     // MARK: - Public functions
@@ -304,5 +314,15 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
         if closeBySwipe {
             closeViewController()
         }
+    }
+    
+    // MARK: - UIViewControllerTransitioningDelegate
+    
+    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        let orZoomAnimation = ORZoomPresentAnimationController()
+        orZoomAnimation.originFrame = presenting.view.frame
+        orZoomAnimation.initFrame = initFrameForGallery(presentingVC: presented)
+        
+        return orZoomAnimation
     }
 }
