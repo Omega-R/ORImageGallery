@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ORImageGallery'
-  s.version          = '1.2.0'
+  s.version          = '1.2.1'
   s.summary          = 'ORImageGallery - collection view based image gallery.'
 
 # This description is used to generate tags and improve search results.
