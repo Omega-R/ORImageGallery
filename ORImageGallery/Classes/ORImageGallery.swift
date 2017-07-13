@@ -131,8 +131,8 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
     
     // MARK: - UIGestureRecognizer methods
     
-    func handlePan(_ recognizaer: UIPanGestureRecognizer) {
-        let point = recognizaer.location(in: view)
+    func handlePan(_ recognizer: UIPanGestureRecognizer) {
+        let point = recognizer.location(in: view)
         
         if pointPreviousPan == .zero {
             pointPreviousPan = point
@@ -145,13 +145,9 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
             swap(&xDiff, &yDiff)
         }
         
-        if fabs(xDiff) > fabs(yDiff) {
-            return
-        }
-        
         pointPreviousPan = point;
         
-        let isLastPanGesture = recognizaer.state == .ended
+        let isLastPanGesture = recognizer.state == .ended
         let constraint = (lastOrientation == .landscapeLeft || lastOrientation == .landscapeRight) ? layoutConstraintCenterXBaseView : layoutConstraintCenterYBaseView
         
         let nextConst = constraint!.constant + yDiff
@@ -162,8 +158,15 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
         updateMainViewAlpha(alpha: alpha)
         
         if isLastPanGesture {
-            if alpha < 1 {
+            let offsetToClose: CGFloat = 20
+            if abs(recognizer.translation(in: self.view).y) > offsetToClose {
                 needCloseCollectionView()
+            } else {
+                constraint?.constant = 0
+                UIView.animate(withDuration: 0.1, animations: {
+                    self.updateMainViewAlpha(alpha: 1)
+                    self.view.layoutSubviews()
+                })
             }
             pointPreviousPan = .zero
         }

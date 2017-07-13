@@ -13,7 +13,9 @@ class ViewController: UIViewController, ORImageGalleryDataSource, ORImageGallery
     
     let pictures = ["https://www.grumpycats.com/images/about/tardar.jpg",
                     "https://yt3.ggpht.com/-V92UP8yaNyQ/AAAAAAAAAAI/AAAAAAAAAAA/zOYDMx8Qk3c/s900-c-k-no-mo-rj-c0xffffff/photo.jpg",
-                    "https://cdn5.thr.com/sites/default/files/imagecache/scale_crop_768_433/2014/09/too_good_for_grumpy_cat.jpg"]
+                    "https://cdn5.thr.com/sites/default/files/imagecache/scale_crop_768_433/2014/09/too_good_for_grumpy_cat.jpg",
+                    "http://cska.ru/upload/thumbs/600w0hc6308729b85028f324efd3b27cc55c23.jpg",
+                    "http://cska.ru/upload/thumbs/600w0h67382fa80aafb3fe09acdb22cc096c64.jpg"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
