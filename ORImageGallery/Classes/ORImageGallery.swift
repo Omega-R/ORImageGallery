@@ -91,15 +91,13 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
         if closeBySwipe {
             pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
             view.addGestureRecognizer(pan)
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActive), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
         }
     }
 
     deinit {
         NotificationCenter.default.removeObserver(self)
-    }
-    
-    override open func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
     fileprivate func scrollCollectionView(forced: Bool = false) {
@@ -111,6 +109,15 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
     
     fileprivate func closeViewController() {
         presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    func resetSwipe() {
+        let constraint = (lastOrientation == .landscapeLeft || lastOrientation == .landscapeRight) ? layoutConstraintCenterXBaseView : layoutConstraintCenterYBaseView
+        constraint?.constant = 0
+        UIView.animate(withDuration: 0.1, animations: {
+            self.updateMainViewAlpha(alpha: 1)
+            self.view.layoutSubviews()
+        })
     }
     
     // MARK: - Public functions
@@ -162,17 +169,20 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
             if abs(recognizer.translation(in: self.view).y) > offsetToClose {
                 needCloseCollectionView()
             } else {
-                constraint?.constant = 0
-                UIView.animate(withDuration: 0.1, animations: {
-                    self.updateMainViewAlpha(alpha: 1)
-                    self.view.layoutSubviews()
-                })
+                resetSwipe()
             }
             pointPreviousPan = .zero
         }
     }
     
     // MARK: - Notifications
+    
+    func applicationWillResignActive() {
+        if pointPreviousPan != .zero {
+            resetSwipe()
+            pointPreviousPan = .zero
+        }
+    }
     
     func deviceOrientationDidChange() {
         let currentOrientation = UIDevice.current.orientation
