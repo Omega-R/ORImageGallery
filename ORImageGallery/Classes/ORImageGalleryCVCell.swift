@@ -47,8 +47,6 @@ class ORImageGalleryCVCell: UICollectionViewCell, UIScrollViewDelegate, UIGestur
         singleTap.numberOfTapsRequired = 1
         addGestureRecognizer(singleTap)
         singleTap.require(toFail: doubleTap)
-        
-        pictureImageView.scale
     }
     
     func updateMinZoomScaleForSize(size: CGSize) {

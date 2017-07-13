@@ -11,8 +11,6 @@ import ORImageGallery
 
 class ViewController: UIViewController, ORImageGalleryDataSource, ORImageGalleryDelegate {
     
-    @IBOutlet weak var buttonShowGallery: UIButton!
-    
     let pictures = ["https://www.grumpycats.com/images/about/tardar.jpg",
                     "https://yt3.ggpht.com/-V92UP8yaNyQ/AAAAAAAAAAI/AAAAAAAAAAA/zOYDMx8Qk3c/s900-c-k-no-mo-rj-c0xffffff/photo.jpg",
                     "https://cdn5.thr.com/sites/default/files/imagecache/scale_crop_768_433/2014/09/too_good_for_grumpy_cat.jpg"]
@@ -31,7 +29,7 @@ class ViewController: UIViewController, ORImageGalleryDataSource, ORImageGallery
         let galleryController = ORImageGallery.createFromNib()
         galleryController.dataSource = self
         galleryController.delegate = self
-        galleryController.selectedIndex = 0
+        galleryController.selectedIndex = 1
         galleryController.rotation = true
         galleryController.closeBySwipe = true
         present(galleryController, animated: true, completion: nil)
@@ -58,10 +56,6 @@ class ViewController: UIViewController, ORImageGalleryDataSource, ORImageGallery
         b.setTitle("Close", for: .normal)
         b.sizeToFit()
         topView.addSubview(b)
-    }
-    
-    func orGalleryOpenFromView(_ gallery: ORImageGallery) -> UIView? {
-        return buttonShowGallery
     }
     
     // MARK: - ORImageGalleryDelegate
