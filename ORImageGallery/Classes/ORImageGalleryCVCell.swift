@@ -52,7 +52,7 @@ class ORImageGalleryCVCell: UICollectionViewCell, UIScrollViewDelegate, UIGestur
     func updateMinZoomScaleForSize(size: CGSize) {
         let widthScale = size.width / pictureImageView.bounds.width
         let heightScale = size.height / pictureImageView.bounds.height
-        let minScale = min(widthScale, heightScale)
+        let minScale = min(widthScale, heightScale) - 0.01
         scrollView.minimumZoomScale = minScale
         scrollView.zoomScale = minScale
         updateConstraintsForSize(size: size)
