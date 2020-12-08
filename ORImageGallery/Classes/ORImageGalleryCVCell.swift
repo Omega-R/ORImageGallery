@@ -97,11 +97,11 @@ class ORImageGalleryCVCell: UICollectionViewCell, UIScrollViewDelegate, UIGestur
     
     // MARK: - UIGestureRecognizer methods
     
-    func doSingleTap() {
+    @objc func doSingleTap() {
         delegate?.doSingleTap()
     }
     
-    func doDoubleTap() {
+    @objc func doDoubleTap() {
         if let scrollView = scrollView {
             let zoomScale: CGFloat = scrollView.zoomScale > scrollView.minimumZoomScale ? scrollView.minimumZoomScale : scrollView.minimumZoomScale * 2
             delegate?.doDoubleTap(showBars: false)

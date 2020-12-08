@@ -85,14 +85,14 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
         dataSource?.orGallery(self, topView: viewForTopView)
         
         if rotation {
-            NotificationCenter.default.addObserver(self, selector: #selector(deviceOrientationDidChange), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(deviceOrientationDidChange), name: UIDevice.orientationDidChangeNotification, object: nil)
         }
         
         if closeBySwipe {
             pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
             view.addGestureRecognizer(pan)
             
-            NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActive), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActive), name: UIApplication.willResignActiveNotification, object: nil)
         }
     }
 
@@ -104,7 +104,7 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
         if selectedIndexPath == IndexPath(row: 0, section: 0) && !forced {
             return
         }
-        collectionView.scrollToItem(at: selectedIndexPath, at: UICollectionViewScrollPosition.centeredHorizontally, animated: false)
+        collectionView.scrollToItem(at: selectedIndexPath, at: UICollectionView.ScrollPosition.centeredHorizontally, animated: false)
     }
     
     fileprivate func closeViewController() {
@@ -138,7 +138,7 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
     
     // MARK: - UIGestureRecognizer methods
     
-    func handlePan(_ recognizer: UIPanGestureRecognizer) {
+    @objc func handlePan(_ recognizer: UIPanGestureRecognizer) {
         let point = recognizer.location(in: view)
         
         if pointPreviousPan == .zero {
@@ -177,17 +177,17 @@ open class ORImageGallery: UIViewController, UICollectionViewDataSource, UIColle
     
     // MARK: - Notifications
     
-    func applicationWillResignActive() {
+    @objc func applicationWillResignActive() {
         if pointPreviousPan != .zero {
             resetSwipe()
             pointPreviousPan = .zero
         }
     }
     
-    func deviceOrientationDidChange() {
+    @objc func deviceOrientationDidChange() {
         let currentOrientation = UIDevice.current.orientation
         
-        if (!UIDeviceOrientationIsValidInterfaceOrientation(currentOrientation)) && !firstOrientationChange {
+        if (!currentOrientation.isValidInterfaceOrientation) && !firstOrientationChange {
             return
         }
         
