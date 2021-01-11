@@ -16,7 +16,7 @@ let package = Package(
         // .package(url: /* package url */, from: "1.0.0"),
         .package(name: "PureLayout",
                  url: "https://github.com/PureLayout/PureLayout",
-                 from: "3.0.2"),
+                 from: "3.1.6"),
         .package(name: "SDWebImage",
                  url: "https://github.com/SDWebImage/SDWebImage",
                  from: "5.10.2")
