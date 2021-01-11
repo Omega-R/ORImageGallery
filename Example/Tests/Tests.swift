@@ -1,5 +1,5 @@
-import UIKit
 import XCTest
+import ORImageGallery
 
 class Tests: XCTestCase {
     

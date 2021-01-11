@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  ORImageGallery
 //
-//  Created by Evgeny Ivanov on 05/04/2017.
-//  Copyright (c) 2017 Evgeny Ivanov. All rights reserved.
+//  Created by Egor Lindberg on 01/11/2021.
+//  Copyright (c) 2021 Egor Lindberg. All rights reserved.
 //
 
 import UIKit

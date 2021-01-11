@@ -1,32 +1,26 @@
 {
   "name": "ORImageGallery",
-  "version": "1.2.1",
+  "version": "2.0.0",
   "summary": "ORImageGallery - collection view based image gallery.",
-  "description": "Pod for display picture gallery, and show custom top layout, and make rotate.",
-  "homepage": "https://bitbucket.org/omegarinc/orimagegallery",
+  "description": "'Pod for display picture gallery, and show custom top layout, and make rotate.'",
+  "homepage": "https://github.com/Omega-R/ORImageGallery",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "Evgeny Ivanov": "evgeny.ivanov@omega-r.com"
+    "Evgeny Ivanov": "evgeny.ivanov@omega-r.com",
+    "Egor Lindberg": "egor-lindberg@omega-r.com"
   },
   "source": {
-    "git": "https://bitbucket.org/omegarinc/orimagegallery.git",
-    "tag": "1.2.1"
-  },
-  "platforms": {
-    "ios": "8.0"
+    "git": "https://github.com/Omega-R/ORImageGallery.git",
+    "tag": "2.0.0"
   },
   "requires_arc": true,
-  "source_files": "ORImageGallery/Classes/**/*",
-  "frameworks": "UIKit",
-  "dependencies": {
-    "PureLayout": [
-      "~> 3.0.2"
-    ],
-    "SDWebImage": [
-      ">= 3.8.2"
-    ]
-  }
+  "platforms": {
+    "ios": "9.0"
+  },
+  "swift_versions": "5.0",
+  "source_files": "Sources/ORImageGallery/Classes/**/*",
+  "swift_version": "5.0"
 }

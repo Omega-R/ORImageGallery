@@ -1,5 +1,13 @@
 use_frameworks!
 
+platform :ios, '9.0'
+
 target 'ORImageGallery_Example' do
   pod 'ORImageGallery', :path => '../'
+
+  target 'ORImageGallery_Tests' do
+    inherit! :search_paths
+
+    pod 'FBSnapshotTestCase' , '~> 2.1.4'
+  end
 end

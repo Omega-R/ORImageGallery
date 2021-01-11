@@ -1,24 +1,27 @@
 PODS:
-  - ORImageGallery (1.2.1):
-    - PureLayout (~> 3.0.2)
-    - SDWebImage (>= 3.8.2)
-  - PureLayout (3.0.2)
-  - SDWebImage (3.8.2):
-    - SDWebImage/Core (= 3.8.2)
-  - SDWebImage/Core (3.8.2)
+  - FBSnapshotTestCase (2.1.4):
+    - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
+  - FBSnapshotTestCase/Core (2.1.4)
+  - FBSnapshotTestCase/SwiftSupport (2.1.4):
+    - FBSnapshotTestCase/Core
+  - ORImageGallery (2.0.0)
 
 DEPENDENCIES:
+  - FBSnapshotTestCase (~> 2.1.4)
   - ORImageGallery (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - FBSnapshotTestCase
 
 EXTERNAL SOURCES:
   ORImageGallery:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  ORImageGallery: cb96eec65dc5ef611dce6583104fbdf939cbb8cf
-  PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
-  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
+  ORImageGallery: 8b68a489c9679409a87ed1889b5b375f8f9cd03f
 
-PODFILE CHECKSUM: e4ec978ea88b6a37c989e17e7644943896ab365f
+PODFILE CHECKSUM: a989f18b7f3ee8a51d0faf169388c08bc9178b64
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.8.3

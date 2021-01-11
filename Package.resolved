@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "PureLayout",
+        "repositoryURL": "https://github.com/PureLayout/PureLayout",
+        "state": {
+          "branch": null,
+          "revision": "6fd4f2f875157d29d5ef00fbaaac149d91df5dcc",
+          "version": "3.1.7"
+        }
+      },
+      {
+        "package": "SDWebImage",
+        "repositoryURL": "https://github.com/SDWebImage/SDWebImage",
+        "state": {
+          "branch": null,
+          "revision": "564d238f8814c4a82502336fd80b28a9d321ff47",
+          "version": "5.10.2"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
